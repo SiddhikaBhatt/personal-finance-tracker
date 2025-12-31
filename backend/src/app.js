@@ -1,18 +1,26 @@
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
-import dotenv from 'dotenv';
+import rateLimit from 'express-rate-limit';
 
-dotenv.config();
+import authRoutes from './routes/auth.routes.js';
 
 const app = express();
 
 app.use(cors());
-app.use(express.json());
 app.use(helmet());
+app.use(express.json());
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100
+});
+app.use(limiter);
+
+app.use('/api/auth', authRoutes);
 
 app.get('/health', (req, res) => {
-  res.json({ status: 'OK' });
+  res.status(200).json({ status: 'OK' });
 });
 
 export default app;
