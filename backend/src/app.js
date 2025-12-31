@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
-
+import transactionRoutes from './routes/transaction.routes.js';
 import authRoutes from './routes/auth.routes.js';
 
 const app = express();
@@ -22,5 +22,6 @@ app.use('/api/auth', authRoutes);
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'OK' });
 });
+app.use('/api/transactions', transactionRoutes);
 
 export default app;
