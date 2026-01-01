@@ -11,9 +11,16 @@ export default function Navbar() {
 
   return (
     <nav style={{ padding: "10px", background: "#111", color: "#fff" }}>
-      <Link to="/dashboard" style={{ marginRight: "10px", color: "#fff" }}>
-        Dashboard
-      </Link>
+      {token && (
+        <Link to="/dashboard" style={{ marginRight: "10px", color: "#fff" }}>
+          Dashboard
+        </Link>
+      )}
+      {token && (
+        <Link to="/transaction" style={{ marginRight: "10px", color: "#fff" }}>
+          Add Transaction
+        </Link>
+      )}
 
       {!token ? (
         <>
